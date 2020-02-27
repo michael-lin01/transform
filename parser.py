@@ -33,4 +33,28 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
-    pass
+    f = open(fname,"r")
+    lines = f.readlines()
+    for line in lines:
+        line = line.strip()
+        if line == "line":
+            pass
+        elif line == "ident":
+            pass
+        elif line == "scale":
+            pass
+        elif line == "move":
+            pass
+        elif line == "rotate":
+            pass
+        elif line == "apply":
+            pass
+        elif line == "display":
+            pass
+        elif line == "save":
+            pass
+    print(lines)
+    f.close()
+
+if __name__ == "__main__":
+    parse_file("script", [],[],[],[])
