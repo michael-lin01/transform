@@ -35,24 +35,31 @@ See the file script for an example of the file format
 def parse_file( fname, points, transform, screen, color ):
     f = open(fname,"r")
     lines = f.readlines()
-    for line in lines:
-        line = line.strip()
-        if line == "line":
-            pass
+    for line_num in range(0,len(lines),2):
+        line = lines[line_num].strip()
+        if line == "line" or line == "scale" or line == "move":
+            args = lines[line_num+1].strip().split(' ')
+            if line == "line":
+                add_edge(points, args[0], args[1], args[2], args[3], args[4], args[5])
+            elif line == "scale":
+                scale = make_scale(args[0], args[1], args[2])
+                matrix_mult(transform, scale)
+            elif line == "move":
+                translate = make_translate(args[0], args[1], args[2])
+                matrix_mult(transform, translate)
+            elif line == "rotate":
+                scale = make_scale(args[0], args[1], args[2])
+                matrix_mult(transform, scale)
         elif line == "ident":
-            pass
-        elif line == "scale":
-            pass
-        elif line == "move":
-            pass
-        elif line == "rotate":
-            pass
+            ident(transform)
         elif line == "apply":
-            pass
+            matrix_mult(transform, edge)
         elif line == "display":
-            pass
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            display(screen)
         elif line == "save":
-            pass
+            clear_screen(screen)
     print(lines)
     f.close()
 
