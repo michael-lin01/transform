@@ -37,7 +37,6 @@ def parse_file( fname, points, transform, screen, color ):
     lines = f.readlines()
     for line_num in range(0,len(lines)):
         line = lines[line_num].strip()
-        print(line)
         if line == "line" or line == "scale" or line == "move" or line == "rotate":
             line_num += 1
             args = lines[line_num].strip().split(' ')
@@ -64,7 +63,6 @@ def parse_file( fname, points, transform, screen, color ):
             ident(transform)
         elif line == "apply":
             matrix_mult(transform, points)
-            print(points)
         elif line == "display":
             clear_screen(screen)
             draw_lines(points, screen, color)
