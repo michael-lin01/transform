@@ -15,7 +15,7 @@ The file follows the following format:
                 then multiply the transform matrix by the scale matrix -
                 takes 3 arguments (sx, sy, sz)
          translate: create a translation matrix,
-                    then multiply the transform matrix by the translation matrix -
+n                    then multiply the transform matrix by the translation matrix -
                     takes 3 arguments (tx, ty, tz)
          rotate: create a rotation matrix,
                  then multiply the transform matrix by the rotation matrix -
@@ -35,33 +35,43 @@ See the file script for an example of the file format
 def parse_file( fname, points, transform, screen, color ):
     f = open(fname,"r")
     lines = f.readlines()
-    for line_num in range(0,len(lines),2):
+    for line_num in range(0,len(lines)):
         line = lines[line_num].strip()
-        if line == "line" or line == "scale" or line == "move":
-            args = lines[line_num+1].strip().split(' ')
+        print(line)
+        if line == "line" or line == "scale" or line == "move" or line == "rotate":
+            line_num += 1
+            args = lines[line_num].strip().split(' ')
             if line == "line":
+                args = list(map(int,args))
                 add_edge(points, args[0], args[1], args[2], args[3], args[4], args[5])
             elif line == "scale":
+                args = list(map(int,args))
                 scale = make_scale(args[0], args[1], args[2])
-                matrix_mult(transform, scale)
+                matrix_mult(scale, transform)
             elif line == "move":
+                args = list(map(int,args))
                 translate = make_translate(args[0], args[1], args[2])
-                matrix_mult(transform, translate)
+                matrix_mult(translate, transform)
             elif line == "rotate":
-                scale = make_scale(args[0], args[1], args[2])
-                matrix_mult(transform, scale)
+                if args[0] == "x":
+                    rotate = make_rotX(int(args[1]))
+                if args[0] == "y":
+                    rotate = make_rotY(int(args[1]))
+                if args[0] == "z":
+                    rotate = make_rotZ(int(args[1]))
+                matrix_mult(rotate, transform)
         elif line == "ident":
             ident(transform)
         elif line == "apply":
-            matrix_mult(transform, edge)
+            matrix_mult(transform, points)
+            print(points)
         elif line == "display":
             clear_screen(screen)
             draw_lines(points, screen, color)
             display(screen)
         elif line == "save":
             clear_screen(screen)
-    print(lines)
+            draw_lines(points, screen, color)
+            save_extension(screen, lines[line_num+1].strip())
     f.close()
 
-if __name__ == "__main__":
-    parse_file("script", [],[],[],[])

@@ -12,9 +12,9 @@ import math
 def make_translate( x, y, z ):
     translate = new_matrix()
     ident(translate)
-    translate[0][3] = x
-    translate[1][3] = y
-    translate[2][3] = z
+    translate[3][0] = x
+    translate[3][1] = y
+    translate[3][2] = z
     return translate
 
 def make_scale( x, y, z ):
@@ -29,8 +29,8 @@ def make_rotX( theta ):
     rotate = new_matrix()
     ident(rotate)
     rotate[1][1] = math.cos(math.radians(theta))
-    rotate[1][2] = -1*math.sin(math.radians(theta))
-    rotate[2][1] = math.sin(math.radians(theta))
+    rotate[2][1] = -1*math.sin(math.radians(theta))
+    rotate[1][2] = math.sin(math.radians(theta))
     rotate[2][2] = math.cos(math.radians(theta))
     return rotate
 
@@ -38,8 +38,8 @@ def make_rotY( theta ):
     rotate = new_matrix()
     ident(rotate)
     rotate[0][0] = math.cos(math.radians(theta))
-    rotate[0][2] = math.sin(math.radians(theta))
-    rotate[2][0] = -1*math.sin(math.radians(theta))
+    rotate[2][0] = math.sin(math.radians(theta))
+    rotate[0][2] = -1*math.sin(math.radians(theta))
     rotate[2][2] = math.cos(math.radians(theta))
     return rotate
 
@@ -47,8 +47,8 @@ def make_rotZ( theta ):
     rotate = new_matrix()
     ident(rotate)
     rotate[0][0] = math.cos(math.radians(theta))
-    rotate[0][1] = -1*math.sin(math.radians(theta))
-    rotate[1][0] = math.sin(math.radians(theta))
+    rotate[1][0] = -1*math.sin(math.radians(theta))
+    rotate[0][1] = math.sin(math.radians(theta))
     rotate[1][1] = math.cos(math.radians(theta))
     return rotate
 
