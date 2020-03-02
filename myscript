@@ -1,0 +1,57 @@
+line
+0 0 0 50 0 0
+line
+50 0 0 50 50 0
+line
+50 50 0 0 50 0
+line
+0 50 0 0 0 0
+line
+0 0 50 50 0 50
+line
+50 0 50 50 50 50
+line
+50 50 50 0 50 50
+line
+0 50 50 0 0 50
+line
+0 0 0 0 0 50
+line
+0 50 0 0 50 50
+line
+50 50 0 50 50 50
+line
+50 0 0 50 0 50
+ident
+move
+-50 350 0
+apply
+ident
+rotate
+z -5
+rotate
+x -10
+rotate
+y -10
+scale
+1.02 1.02 1.02
+apply
+display
+apply
+display
+apply
+display
+apply
+display
+apply
+display
+apply
+display
+apply
+display
+apply
+display
+apply
+display
+save
+cubes.png
